@@ -1,0 +1,8 @@
+License.md
+README.md
+setup.py
+Qforge.egg-info/PKG-INFO
+Qforge.egg-info/SOURCES.txt
+Qforge.egg-info/dependency_links.txt
+Qforge.egg-info/requires.txt
+Qforge.egg-info/top_level.txt
