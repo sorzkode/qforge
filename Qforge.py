@@ -87,7 +87,7 @@ while True:
         pngcode.save(pnglocation + '/' + pngname + '.' + 'png', scale=10, dark=values['-COMBO-'])
         window['-QRTXT-'].update(f'To: {pnglocation}') 
         window['-HDING-'].update('Saved as PNG:', font=('Lucida', 11, ITALIC), text_color='Yellow')
-        sg.Popup(f'Saved {pnglocation}/{pngname}.pdf.')
+        sg.Popup(f'Saved {pnglocation}/{pngname}.png.')
 
     if event == 'SVG':
         svglocation = sg.popup_get_folder('Select a Save location')
@@ -96,6 +96,6 @@ while True:
         svgcode.save(svglocation + '/' + svgname + '.' + 'svg', scale=10, dark=values['-COMBO-'], xmldecl=False, svgns=False, svgclass=None)
         window['-QRTXT-'].update(f'To: {svglocation}') 
         window['-HDING-'].update('Saved as SVG:', font=('Lucida', 11, ITALIC), text_color='Yellow')
-        sg.Popup(f'Saved {svglocation}/{svgname}.pdf.')
+        sg.Popup(f'Saved {svglocation}/{svgname}.svg.')
 
 window.close()
