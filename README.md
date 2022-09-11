@@ -47,9 +47,6 @@ Once the script is initiated:
   3. Save your file using one of the file format buttons (PDF, PNG, SVG)
   4. Follow prompts
 ```
-Note: 
-
-There is no real error handling built into this app. If you enter invalid information in any of the input fields resulting in an error, you likely won't be notified. Your file just won't be saved.
 
 
 

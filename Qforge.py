@@ -72,30 +72,42 @@ while True:
         window['-HDING-'].update('Sample Code:', font=('Lucida', 11, ITALIC), text_color='Yellow')
 
     if event == 'PDF':
-        pdflocation = sg.popup_get_folder('Select a Save location')
-        pdfname = sg.popup_get_text('What do you want to call your file?')
-        pdfcode = segno.make_qr(values['-URL-'])
-        pdfcode.save(pdflocation + '/' + pdfname + '.' + 'pdf', scale=10)
-        window['-QRTXT-'].update(f'To: {pdflocation}') 
-        window['-HDING-'].update('Saved as PDF:', font=('Lucida', 11, ITALIC), text_color='Yellow')
-        sg.Popup(f'Saved {pdflocation}/{pdfname}.pdf.')
+        try:
+            pdflocation = sg.popup_get_folder('Select a Save location')
+            pdfname = sg.popup_get_text('What do you want to call your file?')
+            pdfcode = segno.make_qr(values['-URL-'])
+            pdfcode.save(pdflocation + '/' + pdfname + '.' + 'pdf', scale=10)
+            window['-QRTXT-'].update(f'To: {pdflocation}') 
+            window['-HDING-'].update('Saved as PDF:', font=('Lucida', 11, ITALIC), text_color='Yellow')
+            sg.Popup(f'Saved {pdflocation}/{pdfname}.pdf.')
+        except:
+            sg.Popup('Got cold feet? Ok, maybe later.')
+            pass
 
     if event == 'PNG':
-        pnglocation = sg.popup_get_folder('Select a Save location')
-        pngname = sg.popup_get_text('What do you want to call your file?')
-        pngcode = segno.make_qr(values['-URL-'])
-        pngcode.save(pnglocation + '/' + pngname + '.' + 'png', scale=10, dark=values['-COMBO-'])
-        window['-QRTXT-'].update(f'To: {pnglocation}') 
-        window['-HDING-'].update('Saved as PNG:', font=('Lucida', 11, ITALIC), text_color='Yellow')
-        sg.Popup(f'Saved {pnglocation}/{pngname}.png.')
+        try:
+            pnglocation = sg.popup_get_folder('Select a Save location')
+            pngname = sg.popup_get_text('What do you want to call your file?')
+            pngcode = segno.make_qr(values['-URL-'])
+            pngcode.save(pnglocation + '/' + pngname + '.' + 'png', scale=10, dark=values['-COMBO-'])
+            window['-QRTXT-'].update(f'To: {pnglocation}') 
+            window['-HDING-'].update('Saved as PNG:', font=('Lucida', 11, ITALIC), text_color='Yellow')
+            sg.Popup(f'Saved {pnglocation}/{pngname}.png.')
+        except:
+            sg.Popup('Got cold feet? Ok, maybe later.')
+            pass
 
     if event == 'SVG':
-        svglocation = sg.popup_get_folder('Select a Save location')
-        svgname = sg.popup_get_text('What do you want to call your file?')
-        svgcode = segno.make_qr(values['-URL-'])
-        svgcode.save(svglocation + '/' + svgname + '.' + 'svg', scale=10, dark=values['-COMBO-'], xmldecl=False, svgns=False, svgclass=None)
-        window['-QRTXT-'].update(f'To: {svglocation}') 
-        window['-HDING-'].update('Saved as SVG:', font=('Lucida', 11, ITALIC), text_color='Yellow')
-        sg.Popup(f'Saved {svglocation}/{svgname}.svg.')
+        try:
+            svglocation = sg.popup_get_folder('Select a Save location')
+            svgname = sg.popup_get_text('What do you want to call your file?')
+            svgcode = segno.make_qr(values['-URL-'])
+            svgcode.save(svglocation + '/' + svgname + '.' + 'svg', scale=10, dark=values['-COMBO-'], xmldecl=False, svgns=False, svgclass=None)
+            window['-QRTXT-'].update(f'To: {svglocation}') 
+            window['-HDING-'].update('Saved as SVG:', font=('Lucida', 11, ITALIC), text_color='Yellow')
+            sg.Popup(f'Saved {svglocation}/{svgname}.svg.')
+        except:
+            sg.Popup('Got cold feet? Ok, maybe later.')
+            pass            
 
 window.close()
