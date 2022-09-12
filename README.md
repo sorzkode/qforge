@@ -34,11 +34,11 @@ Installation isn't required to run the script but you will need to ensure the re
 
 If Qforge is installed you can use the following command syntax:
 ```
-python -m qforge
+python -m Qforge
 ```
 Otherwise you can run the script directly by changing directory (cd) in a terminal of your choice to the Qforge directory and using the following syntax:
 ```
-python qforge.py
+python Qforge.py
 ```
 Once the script is initiated: 
 ```
