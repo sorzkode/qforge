@@ -46,7 +46,7 @@ outputside = [[sg.Text('Sample Code:', font=('Lucida', 11, ITALIC), text_color='
               [sg.Text('Save as:', font=('Lucida', 12)), sg.Button('PDF', font=('Lucida', 12, BOLD)), sg.Button('PNG', font=('Lucida', 12, BOLD)), sg.Button('SVG', font=('Lucida', 12, BOLD))]]
 
 # Full window layout
-layout = [[sg.Column(inputside, element_justification='r', pad=(0,0), size=(480,280)), sg.VSeperator(), sg.Column(outputside, element_justification='c', pad=(0,0), size=(240,280))]]
+layout = [[sg.Column(inputside, element_justification='r', pad=(0,0)), sg.VSeperator(), sg.Column(outputside, element_justification='c', pad=(0,0))]]
 
 # Call window
 window = sg.Window('Qforge - QR Code Generator', layout, resizable=True, icon='assets\qic.ico')

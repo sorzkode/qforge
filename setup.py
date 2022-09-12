@@ -8,7 +8,7 @@ setuptools.setup(
     author='sorzkode',
     author_email='<sorzkode@proton.me>',
     packages=setuptools.find_packages(),
-    install_requires=['segno', 'PySimpleGUI'],
+    install_requires=['segno', 'PySimpleGUI', 'tkinter'],
     long_description='A Python QR Code Generator made with PySimpleGUI and sgeno.',
     classifiers=[
         'Programming Language :: Python :: 3',

@@ -1,2 +1,3 @@
 segno
 PySimpleGUI
+tkinter
