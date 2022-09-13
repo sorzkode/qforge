@@ -30,6 +30,8 @@ Installation isn't required to run the script but you will need to ensure the re
 
   [[segno module](https://pypi.org/project/segno/)]
 
+  [[tkinter](https://docs.python.org/3/library/tkinter.html)] :: Linux Users
+
 ## Usage
 
 If Qforge is installed you can use the following command syntax:
