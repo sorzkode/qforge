@@ -11,12 +11,12 @@
 A Python QR Code generator made with PySimpleGUI and segno.
 -
 Author:
-sorzkode
+Mister Riley
 sorzkode@proton.me
 https://github.com/sorzkode
 
 MIT License
-Copyright (c) 2022 sorzkode
+Copyright (c) 2023 Mister Riley
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -32,18 +32,127 @@ sg.theme('DarkTeal9')
 # Colors list for combobox
 qrcolors = ['Black', 'Red', 'Green', 'Blue', 'Yellow', 'Orange', 'Purple', 'Teal', 'Magenta']
 
+# Fonts
+FONT_SUBTEXT = ('Lucida', 10, ITALIC)
+FONT_ITL = ('Lucida', 11, ITALIC)
+FONT_TITLE = ('Lucida', 12, BOLD)
+FONT_BOLDTEXT = ('Lucida', 11, BOLD)
+
 # Left window setup
-inputside = [[sg.Image(filename='assets\qflogo.png', key='-LOGO-')],
-             [sg.Text('A Python QR Code Generator', font=('Lucida', 10, ITALIC), text_color='Gray', pad=(10,5))],
-             [sg.Text('URL:', font=('Lucida', 12, BOLD), pad=(0,5)), sg.In(size=50, font=('Lucida', 11, BOLD), enable_events=True, key='-URL-')],
-             [sg.Text('Color:', font=('Lucida', 12, BOLD), pad=(0,0)), sg.Combo(qrcolors, default_value=qrcolors[0], s=(15,22), enable_events=True, readonly=True, k='-COMBO-'), sg.Text('           '), sg.Button('Generate', font=('Lucida', 12, BOLD), pad=(5,15)), sg.Button('Clear', font=('Lucida', 12, BOLD), pad=(5,15)), sg.Button('Exit', font=('Lucida', 12, BOLD), pad=(5,15))],
-             [sg.Text('Note: PDF files do not support multiple colors. \n PDFs will default to black regardless of dropdown selection.', font=('Lucida', 10, ITALIC), text_color='Gray', pad=(0,0))]]
+inputside = [
+    [
+        sg.Image(
+            filename='assets\qflogo.png',
+            key='-LOGO-'
+        )
+    ],
+    [
+        sg.Text(
+        'A Python QR Code Generator',
+        font=FONT_SUBTEXT,
+        text_color='Gray',
+        pad=(10,5)
+        )
+    ],
+    [
+        sg.Text(
+            'URL:',
+            font=FONT_TITLE,
+            pad=(0,5)
+        ),
+        sg.In(
+            size=50, 
+            font=FONT_BOLDTEXT, 
+            enable_events=True,
+            key='-URL-'
+        )
+    ],
+    [
+        sg.Text(
+            'Color:',
+            font=FONT_TITLE,
+            pad=(0,0)
+        ),
+        sg.Combo(
+            qrcolors,
+            default_value=qrcolors[0],
+            size=(15,22),
+            enable_events=True,
+            readonly=True,
+            key='-COMBO-'
+        ),
+        sg.Text(
+            '           '
+        ),
+        sg.Button(
+            'Generate',
+            font=FONT_TITLE,
+            pad=(5,15)
+        ),
+        sg.Button(
+            'Clear',
+            font=FONT_TITLE,
+            pad=(5,15)
+        ),
+        sg.Button(
+            'Exit',
+            font=FONT_TITLE,
+            pad=(5,15)
+        )
+    ],
+    [
+        sg.Text(
+            'Note: PDF files do not support multiple colors. \n PDFs will default to black regardless of dropdown selection.',
+            font=FONT_SUBTEXT,
+            text_color='Gray',
+            pad=(0,0)
+        )
+    ]
+]
 
 # Right window setup
-outputside = [[sg.Text('Sample Code:', font=('Lucida', 11, ITALIC), text_color='Yellow', key='-HDING-')],
-              [sg.Image(filename='assets\sample.png', key='-QROUT-')],
-              [sg.Text('https://sampleurl.com', font=('Lucida', 10, ITALIC), text_color='Gray', key='-QRTXT-')],
-              [sg.Text('Save as:', font=('Lucida', 12)), sg.Button('PDF', font=('Lucida', 12, BOLD)), sg.Button('PNG', font=('Lucida', 12, BOLD)), sg.Button('SVG', font=('Lucida', 12, BOLD))]]
+outputside = [
+    [
+        sg.Text(
+            'Sample Code:',
+            font=FONT_ITL,
+            text_color='Yellow',
+            key='-HDING-'
+        )
+    ],
+    [
+        sg.Image(
+            filename='assets\sample.png',
+            key='-QROUT-'
+        )
+    ],
+    [
+        sg.Text(
+            'https://sampleurl.com',
+            font=FONT_SUBTEXT,
+            text_color='Gray',
+            key='-QRTXT-'
+        )
+    ],
+    [
+        sg.Text(
+            'Save as:', 
+            font=('Lucida', 12)
+        ), 
+        sg.Button(
+            'PDF', 
+            font=FONT_TITLE
+        ),
+        sg.Button(
+            'PNG',
+            font=FONT_TITLE
+        ),
+        sg.Button(
+            'SVG',
+            font=FONT_TITLE
+        )
+    ]
+]
 
 # Full window layout
 layout = [[sg.Column(inputside, element_justification='r', pad=(0,0)), sg.VSeperator(), sg.Column(outputside, element_justification='c', pad=(0,0))]]
