@@ -16,11 +16,12 @@ sorzkode@proton.me
 https://github.com/sorzkode
 
 MIT License
-Copyright (c) 2023 Mister Riley
+Copyright (c) 2024 Mister Riley
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 '''
+
 # Dependencies
 from tkinter.font import ITALIC, BOLD
 import PySimpleGUI as sg
@@ -33,129 +34,59 @@ sg.theme('DarkTeal9')
 qrcolors = ['Black', 'Red', 'Green', 'Blue', 'Yellow', 'Orange', 'Purple', 'Teal', 'Magenta']
 
 # Fonts
-FONT_SUBTEXT = ('Lucida', 10, ITALIC)
-FONT_ITL = ('Lucida', 11, ITALIC)
-FONT_TITLE = ('Lucida', 12, BOLD)
-FONT_BOLDTEXT = ('Lucida', 11, BOLD)
+font_subtext = ('Lucida', 10, ITALIC)
+font_itl = ('Lucida', 11, ITALIC)
+font_title = ('Lucida', 12, BOLD)
+font_boldtext = ('Lucida', 11, BOLD)
 
 # Left window setup
 inputside = [
     [
-        sg.Image(
-            filename='assets\qflogo.png',
-            key='-LOGO-'
-        )
+        sg.Image(filename='assets\qflogo.png', key='-logo-')
     ],
     [
-        sg.Text(
-        'A Python QR Code Generator',
-        font=FONT_SUBTEXT,
-        text_color='Gray',
-        pad=(10,5)
-        )
+        sg.Text('A Python QR Code Generator', font=font_subtext, text_color='Gray', pad=(10,5))
     ],
     [
-        sg.Text(
-            'URL:',
-            font=FONT_TITLE,
-            pad=(0,5)
-        ),
-        sg.In(
-            size=50, 
-            font=FONT_BOLDTEXT, 
-            enable_events=True,
-            key='-URL-'
-        )
+        sg.Text('URL:', font=font_title, pad=(0,5)),
+        sg.In(size=50, font=font_boldtext, enable_events=True, key='-url-')
     ],
     [
-        sg.Text(
-            'Color:',
-            font=FONT_TITLE,
-            pad=(0,0)
-        ),
-        sg.Combo(
-            qrcolors,
-            default_value=qrcolors[0],
-            size=(15,22),
-            enable_events=True,
-            readonly=True,
-            key='-COMBO-'
-        ),
-        sg.Text(
-            '           '
-        ),
-        sg.Button(
-            'Generate',
-            font=FONT_TITLE,
-            pad=(5,15)
-        ),
-        sg.Button(
-            'Clear',
-            font=FONT_TITLE,
-            pad=(5,15)
-        ),
-        sg.Button(
-            'Exit',
-            font=FONT_TITLE,
-            pad=(5,15)
-        )
+        sg.Text('Color:', font=font_title, pad=(0,0)),
+        sg.Combo(qrcolors, default_value=qrcolors[0], size=(15,22), enable_events=True, readonly=True, key='-combo-'),
+        sg.Text('           '),
+        sg.Button('Generate', font=font_title, pad=(5,15)),
+        sg.Button('Clear', font=font_title, pad=(5,15)),
+        sg.Button('Exit', font=font_title, pad=(5,15))
     ],
     [
-        sg.Text(
-            'Note: PDF files do not support multiple colors. \n PDFs will default to black regardless of dropdown selection.',
-            font=FONT_SUBTEXT,
-            text_color='Gray',
-            pad=(0,0)
-        )
+        sg.Text('Note: PDF files do not support multiple colors. \n PDFs will default to black regardless of dropdown selection.', font=font_subtext, text_color='Gray', pad=(0,0))
     ]
 ]
 
 # Right window setup
 outputside = [
     [
-        sg.Text(
-            'Sample Code:',
-            font=FONT_ITL,
-            text_color='Yellow',
-            key='-HDING-'
-        )
+        sg.Text('Sample Code:', font=font_itl, text_color='Yellow', key='-hding-')
     ],
     [
-        sg.Image(
-            filename='assets\sample.png',
-            key='-QROUT-'
-        )
+        sg.Image(filename='assets\sample.png', key='-qrout-')
     ],
     [
-        sg.Text(
-            'https://sampleurl.com',
-            font=FONT_SUBTEXT,
-            text_color='Gray',
-            key='-QRTXT-'
-        )
+        sg.Text('https://sampleurl.com', font=font_subtext, text_color='Gray', key='-qrtxt-')
     ],
     [
-        sg.Text(
-            'Save as:', 
-            font=('Lucida', 12)
-        ), 
-        sg.Button(
-            'PDF', 
-            font=FONT_TITLE
-        ),
-        sg.Button(
-            'PNG',
-            font=FONT_TITLE
-        ),
-        sg.Button(
-            'SVG',
-            font=FONT_TITLE
-        )
+        sg.Text('Save as:', font=font_title), 
+        sg.Button('PDF', font=font_title),
+        sg.Button('PNG', font=font_title),
+        sg.Button('SVG', font=font_title)
     ]
 ]
 
 # Full window layout
-layout = [[sg.Column(inputside, element_justification='r', pad=(0,0)), sg.VSeperator(), sg.Column(outputside, element_justification='c', pad=(0,0))]]
+layout = [
+    [sg.Column(inputside, element_justification='r', pad=(0,0)), sg.VSeperator(), sg.Column(outputside, element_justification='c', pad=(0,0))]
+]
 
 # Call window
 window = sg.Window('Qforge - QR Code Generator', layout, resizable=True, icon='assets\qic.ico')
@@ -167,56 +98,56 @@ while True:
         break
 
     if event == 'Generate':
-        qrcode = segno.make_qr(values['-URL-'])
-        qrcode.save('temp.png', scale=5, dark=values['-COMBO-'])
-        window['-QROUT-'].update('temp.png')
-        window['-QRTXT-'].update(values['-URL-']) 
-        window['-HDING-'].update('Your Code:', font=('Lucida', 11, BOLD), text_color='White')
-    
+        try:
+            qrcode = segno.make_qr(values['-url-'])
+            qrcode.save('temp.png', scale=5, dark=values['-combo-'])
+            window['-qrout-'].update('temp.png')
+            window['-qrtxt-'].update(values['-url-']) 
+            window['-hding-'].update('Your Code:', font=font_boldtext, text_color='White')
+        except Exception as e:
+            sg.Popup(f'Error generating QR code: {str(e)}')
+
     if event == 'Clear':
-        window['-URL-'].update('')
-        window['-COMBO-'].update(qrcolors[0])
-        window['-QROUT-'].update('assets\sample.png')
-        window['-QRTXT-'].update('URL cleared') 
-        window['-HDING-'].update('Sample Code:', font=('Lucida', 11, ITALIC), text_color='Yellow')
+        window['-url-'].update('')
+        window['-combo-'].update(qrcolors[0])
+        window['-qrout-'].update('assets\sample.png')
+        window['-qrtxt-'].update('URL cleared') 
+        window['-hding-'].update('Sample Code:', font=font_itl, text_color='Yellow')
 
     if event == 'PDF':
         try:
             pdflocation = sg.popup_get_folder('Select a Save location')
             pdfname = sg.popup_get_text('What do you want to call your file?')
-            pdfcode = segno.make_qr(values['-URL-'])
+            pdfcode = segno.make_qr(values['-url-'])
             pdfcode.save(pdflocation + '/' + pdfname + '.' + 'pdf', scale=10)
-            window['-QRTXT-'].update(f'To: {pdflocation}') 
-            window['-HDING-'].update('Saved as PDF:', font=('Lucida', 11, ITALIC), text_color='Yellow')
+            window['-qrtxt-'].update(f'To: {pdflocation}') 
+            window['-hding-'].update('Saved as PDF:', font=font_itl, text_color='Yellow')
             sg.Popup(f'Saved {pdflocation}/{pdfname}.pdf.')
-        except:
-            sg.Popup('Got cold feet? Ok, maybe later.')
-            pass
+        except Exception as e:
+            sg.Popup(f'Error saving as PDF: {str(e)}')
 
     if event == 'PNG':
         try:
             pnglocation = sg.popup_get_folder('Select a Save location')
             pngname = sg.popup_get_text('What do you want to call your file?')
-            pngcode = segno.make_qr(values['-URL-'])
-            pngcode.save(pnglocation + '/' + pngname + '.' + 'png', scale=10, dark=values['-COMBO-'])
-            window['-QRTXT-'].update(f'To: {pnglocation}') 
-            window['-HDING-'].update('Saved as PNG:', font=('Lucida', 11, ITALIC), text_color='Yellow')
+            pngcode = segno.make_qr(values['-url-'])
+            pngcode.save(pnglocation + '/' + pngname + '.' + 'png', scale=10, dark=values['-combo-'])
+            window['-qrtxt-'].update(f'To: {pnglocation}') 
+            window['-hding-'].update('Saved as PNG:', font=font_itl, text_color='Yellow')
             sg.Popup(f'Saved {pnglocation}/{pngname}.png.')
-        except:
-            sg.Popup('Got cold feet? Ok, maybe later.')
-            pass
+        except Exception as e:
+            sg.Popup(f'Error saving as PNG: {str(e)}')
 
     if event == 'SVG':
         try:
             svglocation = sg.popup_get_folder('Select a Save location')
             svgname = sg.popup_get_text('What do you want to call your file?')
-            svgcode = segno.make_qr(values['-URL-'])
-            svgcode.save(svglocation + '/' + svgname + '.' + 'svg', scale=10, dark=values['-COMBO-'], xmldecl=False, svgns=False, svgclass=None)
-            window['-QRTXT-'].update(f'To: {svglocation}') 
-            window['-HDING-'].update('Saved as SVG:', font=('Lucida', 11, ITALIC), text_color='Yellow')
+            svgcode = segno.make_qr(values['-url-'])
+            svgcode.save(svglocation + '/' + svgname + '.' + 'svg', scale=10, dark=values['-combo-'], xmldecl=False, svgns=False, svgclass=None)
+            window['-qrtxt-'].update(f'To: {svglocation}') 
+            window['-hding-'].update('Saved as SVG:', font=font_itl, text_color='Yellow')
             sg.Popup(f'Saved {svglocation}/{svgname}.svg.')
-        except:
-            sg.Popup('Got cold feet? Ok, maybe later.')
-            pass            
+        except Exception as e:
+            sg.Popup(f'Error saving as SVG: {str(e)}')
 
 window.close()

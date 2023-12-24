@@ -5,7 +5,7 @@ with open('README.md', 'r') as f:
 
 setuptools.setup(
     name='Qforge',
-    version='1.0.0',
+    version='1.1.0',
     description='QR Code Generator.',
     long_description=long_description,
     long_description_content_type='text/markdown',
